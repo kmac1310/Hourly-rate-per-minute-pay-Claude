@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hourly Rate Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #calculateBtn {
+            background-color: #4CAF50;
+        }
+        #calculateBtn:hover {
+            background-color: #45a049;
+        }
+        #resetBtn {
+            background-color: #f44336;
+        }
+        #resetBtn:hover {
+            background-color: #d32f2f;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Hourly Rate Calculator</h2>
+        <input type="number" id="perMinuteRate" placeholder="Enter amount per minute ($)" step="0.01">
+        <button id="calculateBtn" onclick="calculateHourlyRate()">Calculate Hourly Rate</button>
+        <button id="resetBtn" onclick="resetCalculator()">Reset</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateHourlyRate() {
+            const perMinuteRate = parseFloat(document.getElementById('perMinuteRate').value);
+            const resultDiv = document.getElementById('result');
+
+            if (isNaN(perMinuteRate) || perMinuteRate < 0) {
+                resultDiv.innerHTML = "Please enter a valid positive number for the per-minute rate.";
+                return;
+            }
+
+            const hourlyRate = (perMinuteRate * 60).toFixed(2);
+            resultDiv.innerHTML = `If you earn $${perMinuteRate.toFixed(2)} per minute, your hourly rate is: $${hourlyRate}`;
+        }
+
+        function resetCalculator() {
+            document.getElementById('perMinuteRate').value = '';
+            document.getElementById('result').innerHTML = '';
+        }
+    </script>
+</body>
+</html>
